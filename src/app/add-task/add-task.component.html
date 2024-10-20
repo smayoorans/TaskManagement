@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+
+
+
+    <div class="card-header">
+      <h3>Add New Task</h3>
+    </div>
+    <div class="card-body" style="width: 400px;">
+
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" formControlName="title">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" class="form-control" id="description" formControlName="description">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Due Date</label>
+          <input type="date" class="form-control" id="dueDate" formControlName="dueDate">
+        </div>
+
+        <div class="mb-3">
+          <label for="priority" class="form-label">Priority</label>
+          <select class="form-control" id="priority" formControlName="priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+
+        <div class="mb-3 mx-auto">
+          <button type="submit" [disabled]="taskForm.invalid"
+          class="btn btn-primary me-2">Submit</button>
+
+          <button type="button" (click)="cancel()"
+          class="btn btn-secondary">Cancel</button>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
