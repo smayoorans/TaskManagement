@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task, TaskService } from '../task.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-task',
@@ -12,7 +14,7 @@ export class ListTaskComponent implements OnInit {
 
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private toastr: ToastrService, private router: Router) {
 
   }
 
@@ -21,10 +23,15 @@ export class ListTaskComponent implements OnInit {
   }
 
   onDelete(taskId: number) {
-    this.taskService.deleteTask(taskId).subscribe(data => {
-      alert('Task is deleted');
-      this.loadTask();
-    });
+    if(confirm('Do you want to delete?')) {
+      this.taskService.deleteTask(taskId).subscribe(data => {
+        this.toastr.success('Task is deleted', "Deleted", {
+          timeOut: 10000,
+          closeButton: true
+        });
+        this.loadTask();
+      });
+    }
   }
 
   loadTask() {
@@ -33,4 +40,11 @@ export class ListTaskComponent implements OnInit {
     })
   }
 
+  onEdit(taskId: number) {
+    this.router.navigate(['/edit', taskId])
+  }
+
 }
+
+
+

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+
+      <div class="d-flex justify-content-between mb-3">
+        <div class="p-2">
+          <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search User....">
+        </div>
+        <div class="ml-auto p-2">
+          <button type="button" class="btn btn-dark" [routerLink]="['/user-add']">New User</button>
+        </div>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.phone}}</td>
+            <td>
+                <button type="button" class="btn btn-danger me-3" (click)="onDelete(user.id)">
+                  <i class="bi bi-trash3"></i>
+                </button>
+
+                <button type="button" class="btn btn-warning" (click)="onEdit(user.id)">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
